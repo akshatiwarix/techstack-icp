@@ -187,7 +187,7 @@ the same commands here.
 - **Zod v4** for the corpus contract and the query schema
 - **Vitest** (`vitest.config.mts`, globs `lib/**/*.test.ts` only), `vite-node` for scripts
 - **npm** as the committed package manager
-- **`@google/genai`** — `gemini-2.5-flash`, optional
+- **`@google/genai`** — `gemini-3.6-flash`, optional
 - **Vercel** for deployment; **GitHub** `akshatiwarix/techstack-icp`, MIT
 
 **Engine boundary (new this day):** `lib/technographics/` imports nothing but
@@ -202,7 +202,7 @@ The UI is a client of the engine, provably rather than rhetorically.
 1. **Authored corpus** (`data/`) — the demo path, zero network, Zod-validated at
    import. Companies, technologies, surfaces, relations, observations.
 2. **`POST /api/translate`** — plain English → structured query via
-   `gemini-2.5-flash`, structured output validated by Zod, result lands
+   `gemini-3.6-flash`, structured output validated by Zod, result lands
    **unrun and editable** in the builder. No key → the panel collapses to a line
    pointing at the builder; nothing else changes.
 3. **`POST /api/inspect`** — one URL, server-side, 6s timeout, `robots.txt`
@@ -568,7 +568,7 @@ demo GIF; *Why I Built This* (the four failures); *What It Does*; *Demo*;
 17. Blindness surfaced in three places: predicate, query, account.
 18. Live fetch: one URL, 6s, robots-honoring, rate-limited, two surfaces only,
     unfetched surfaces stay `UNKNOWN`.
-19. `gemini-2.5-flash`, structured output, Zod-validated, lands unrun.
+19. `gemini-3.6-flash`, structured output, Zod-validated, lands unrun.
 20. Exports: query permalink and fleet CSV preserving four-state values.
 21. Test plan: unit tests, invariant sweep, one named test per trap.
 22. Docs: README, plain-English guide, demo GIF, deployment screenshots.
