@@ -218,12 +218,27 @@ export type CompanyResolution = {
 // Corpus
 // ---------------------------------------------------------------------------
 
+/**
+ * LOAD-BEARING. A record that a surface was looked at for this company, whether
+ * or not anything was found on it. Without this, `ABSENT` is unreachable and the
+ * four-state model collapses to three: you cannot distinguish "we fetched the
+ * page and there was no chat widget" from "nobody fetched the page".
+ *
+ * An inspection decays like evidence does. A page fetched four years ago does
+ * not establish what is on the page today.
+ */
+export type Inspection = {
+  surface: SurfaceId;
+  on: string;
+};
+
 export type Company = {
   id: string;
   name: string;
   domain: string;
   employees: number;
   industry: string;
+  inspections: Inspection[];
   /** The named trap this company carries. Asserted by a test of the same name. */
   trap: string;
   trapNote: string;

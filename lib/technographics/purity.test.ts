@@ -28,6 +28,17 @@ const IMPORT_RE = /(?:^|\n)\s*(?:import|export)[\s\S]*?from\s+["']([^"']+)["']/g
 const DYNAMIC_IMPORT_RE = /\bimport\(\s*["']([^"']+)["']\s*\)/g;
 const REQUIRE_RE = /\brequire\(\s*["']([^"']+)["']\s*\)/g;
 
+/**
+ * Comments are stripped first. Prose in a doc comment can contain the word
+ * `from` followed by a quoted phrase, and a scanner that reads that as an
+ * import is a scanner nobody will trust the next time it fires.
+ */
+function stripComments(source: string): string {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|[^:])\/\/.*$/gm, "$1");
+}
+
 function specifiersIn(source: string): string[] {
   const found: string[] = [];
   for (const re of [IMPORT_RE, DYNAMIC_IMPORT_RE, REQUIRE_RE]) {
@@ -51,7 +62,7 @@ describe("engine purity", () => {
 
   for (const file of files) {
     it(`${file.slice(ENGINE_DIR.length + 1)} imports only zod and relative modules`, () => {
-      const offenders = specifiersIn(readFileSync(file, "utf8")).filter(
+      const offenders = specifiersIn(stripComments(readFileSync(file, "utf8"))).filter(
         (specifier) =>
           !specifier.startsWith(".") &&
           !ALLOWED_BARE_SPECIFIERS.has(specifier),

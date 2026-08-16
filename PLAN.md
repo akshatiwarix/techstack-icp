@@ -144,7 +144,7 @@ methodology PDF.
 
 - Six detection surfaces with declared reach, half-life, and exhaustiveness.
 - 32 technologies across 8 categories, with four graph relations.
-- ~120 authored observations across 14 companies, each company carrying at least
+- 89 authored observations across 14 companies, each company carrying at least
   one named trap.
 - Four-state claim resolution (`PRESENT` / `ABSENT` / `UNKNOWN` / `UNKNOWABLE`)
   with three presence grades (`CONFIRMED` / `LIKELY` / `HINTED`), contradiction
@@ -396,7 +396,7 @@ All names invented, all domains `.example`.
 
 | # | Company | Trap |
 |---|---|---|
-| 1 | Northwind Retail | **Vestigial tag.** Superseded tool still loading in markup; engineering blog says they moved off it. |
+| 1 | Northwind Retail | **Vestigial tag.** A retired analytics tag still loading in markup; engineering blog says it was switched off. |
 | 2 | Tessellate | **Mid-migration.** Two CDPs both `CONFIRMED` via runtime artifacts. |
 | 3 | Kestrel Health | **Aspirational posting.** Job posting asks for a warehouse they never deployed — `LIKELY`, reach `engineering_intent`, labelled as intent. |
 | 4 | Bellwether Labs | **Marketing-only reach.** Marketing automation `CONFIRMED` on `page_markup`; an ICP reading it as engineering adoption is wrong. |
@@ -409,7 +409,7 @@ All names invented, all domains `.example`.
 | 11 | Palisade | **Answerable gap.** No chat widget on a fully-inspected page ⇒ genuine `ABSENT`. |
 | 12 | Cinder & Co | **Contradiction.** Markup shows the old vendor; blog states the replacement; both `CONFIRMED`. |
 | 13 | Oakline | **Excluded.** Runs the competitor the query rules out. |
-| 14 | Thornbury | **Supersession chain.** Legacy analytics and its successor both present. |
+| 14 | Thornbury | **Supersession chain.** Legacy analytics and its successor both present, with no statement anywhere — the flag has to come from the graph alone. |
 
 **Categories (8):** `analytics`, `cdp`, `warehouse`, `reverse_etl`,
 `support_chat`, `crm`, `marketing_automation`, `infra_edge`.
@@ -474,7 +474,7 @@ One commit each, pushed to `main` immediately after.
 
 Unit tests per module under `lib/**/*.test.ts`, plus:
 
-**`npm run sweep`** — 14 companies × 32 technologies × 5 as-of dates (~2,240
+**`npm run sweep`** — 14 companies × 32 technologies × 5 as-of dates (2,240
 resolutions), asserting:
 
 1. Every `(company, technology)` resolves to **exactly one** of the four states.
@@ -562,7 +562,7 @@ demo GIF; *Why I Built This* (the four failures); *What It Does*; *Demo*;
 12. No score, no weights, no number. Five tiers.
     *(Refined: `MATCH_WITH_GAPS` → `INCONCLUSIVE`; see Tiers.)*
 13. Observations dated; per-surface half-lives; no event derivation.
-14. ~14 companies, ~32 technologies, 8 categories, ~120 observations, named traps.
+14. 14 companies, 32 technologies, 8 categories, 89 observations, named traps.
 15. `lib/technographics/` is dependency-free and framework-free, enforced by lint.
 16. Evidence rendered as a detection receipt — surface, rule, date, grade. No spans.
 17. Blindness surfaced in three places: predicate, query, account.

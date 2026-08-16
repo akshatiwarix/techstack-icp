@@ -85,6 +85,11 @@ export const observationSchema = z.object({
   ruleId: z.string().min(1),
 });
 
+export const inspectionSchema = z.object({
+  surface: surfaceIdSchema,
+  on: isoDate,
+});
+
 export const companySchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
@@ -93,6 +98,7 @@ export const companySchema = z.object({
     .regex(/\.example$/, "corpus domains must end in .example"),
   employees: z.number().int().positive(),
   industry: z.string().min(1),
+  inspections: z.array(inspectionSchema).min(1),
   trap: z.string().min(1),
   trapNote: z.string().min(1),
 });
