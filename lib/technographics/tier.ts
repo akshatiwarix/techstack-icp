@@ -55,7 +55,17 @@ export function evaluateAccount(input: {
     reason = failed[0]?.reason ?? "A predicate definitively does not hold.";
   } else if (unanswerable.length > 0) {
     tier = "UNANSWERABLE";
-    reason = unanswerable[0]?.reason ?? "A predicate cannot be answered by this data.";
+    // The refusal itself is a property of the question and is stated once, at
+    // the top of the fleet. What is worth saying per account is what *did*
+    // hold — otherwise every row repeats the same sentence and says nothing
+    // about the account it is attached to.
+    const held = predicateResults.filter(
+      (result) => result.outcome === "SATISFIED",
+    );
+    reason =
+      held.length > 0
+        ? `${held.map((result) => result.reason).join(" ")} The rest of the query cannot be evaluated for anybody.`
+        : unanswerable[0]?.reason ?? "A predicate cannot be answered by this data.";
   } else if (inconclusive.length > 0) {
     tier = "INCONCLUSIVE";
     reason = inconclusive[0]?.reason ?? "A predicate depends on something nobody inspected.";
