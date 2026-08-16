@@ -641,7 +641,7 @@ export const OBSERVATIONS: Observation[] = [
     surface: "job_posting",
     observedOn: "2026-07-15",
     raw: "Support Lead — we do not run a live chat product today and you will help us choose one.",
-    kind: "stated_mention",
+    kind: "negative_statement",
     technologyId: "intercom",
     ruleId: "posting/evaluating-category",
   },
