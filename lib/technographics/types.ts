@@ -92,7 +92,18 @@ export type Technology = {
 
 export type Relation =
   | { kind: "competes_with"; a: string; b: string }
-  | { kind: "implies"; from: string; to: string; because: string }
+  /**
+   * `to` names either a technology or a whole category. "A CDP implies a
+   * warehouse exists" is the useful form and it cannot name which warehouse —
+   * that is exactly the blind spot being pointed at.
+   */
+  | {
+      kind: "implies";
+      from: string;
+      to: string;
+      toKind: "technology" | "category";
+      because: string;
+    }
   | { kind: "superseded_by"; old: string; replacement: string };
 
 // ---------------------------------------------------------------------------

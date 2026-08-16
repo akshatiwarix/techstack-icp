@@ -64,6 +64,7 @@ export const relationSchema = z.union([
     kind: z.literal("implies"),
     from: z.string().min(1),
     to: z.string().min(1),
+    toKind: z.enum(["technology", "category"]),
     because: z.string().min(1),
   }),
   z.object({
